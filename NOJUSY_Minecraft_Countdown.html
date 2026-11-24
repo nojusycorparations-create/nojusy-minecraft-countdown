@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NOJUSY — Minecraft Era Countdown</title>
+<style>
+:root{color-scheme:dark;--purple:#a855f7;--cyan:#67e8f9}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at 50% 15%,#38205f 0%,#17102b 45%,#080711 100%);font-family:Arial,Helvetica,sans-serif;color:#fff;overflow:hidden}
+body:before{content:"";position:fixed;inset:0;background:linear-gradient(transparent 95%,#ffffff08 96%),linear-gradient(90deg,transparent 95%,#ffffff08 96%);background-size:36px 36px;mask-image:linear-gradient(to bottom,black,transparent);pointer-events:none}
+.card{width:min(760px,100%);text-align:center;padding:clamp(28px,6vw,58px) 22px;border:1px solid #c084fc66;border-radius:28px;background:#100c20d9;box-shadow:0 0 35px #9333ea33,inset 0 0 35px #9333ea12;position:relative}
+.pick{font-size:clamp(44px,8vw,72px);filter:drop-shadow(0 0 16px #a855f7)}
+.kicker{letter-spacing:.28em;text-transform:uppercase;color:#d8b4fe;font-size:12px;font-weight:700;margin:10px 0 14px}
+h1{font-size:clamp(34px,7vw,62px);line-height:1.02;margin:0;text-shadow:0 0 22px #a855f7}
+h1 span{color:#c084fc}
+.sub{color:#c9c2d8;font-size:clamp(14px,2.4vw,18px);margin:18px auto 30px;max-width:520px;line-height:1.5}
+.timer{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:600px;margin:0 auto}
+.unit{padding:18px 8px;border-radius:16px;background:linear-gradient(160deg,#28183f,#171126);border:1px solid #a855f755;box-shadow:0 0 18px #9333ea20}
+.num{font-size:clamp(30px,6vw,52px);font-weight:800;font-variant-numeric:tabular-nums;color:#fff;text-shadow:0 0 14px #a855f7}
+.label{font-size:11px;letter-spacing:.18em;color:#c4b5fd;margin-top:5px}
+.footer{margin-top:28px;color:#a99dbd;font-size:12px;letter-spacing:.12em}
+#done{display:none;font-size:clamp(25px,5vw,42px);font-weight:900;color:#d8b4fe;text-shadow:0 0 22px #a855f7}
+@media(max-width:480px){.timer{gap:7px}.unit{padding:14px 3px}.label{font-size:9px;letter-spacing:.1em}}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="pick">⛏️</div>
+  <div class="kicker">A new chapter is loading</div>
+  <h1>GOODBYE ROBLOX.<br><span>HELLO MINECRAFT.</span></h1>
+  <p class="sub">The NOJUSY Minecraft era begins soon. Mining SMP, new adventures, and a whole new chapter.</p>
+  <section class="timer" id="timer" aria-label="Countdown">
+    <div class="unit"><div class="num" id="days">00</div><div class="label">DAYS</div></div>
+    <div class="unit"><div class="num" id="hours">00</div><div class="label">HOURS</div></div>
+    <div class="unit"><div class="num" id="minutes">00</div><div class="label">MINUTES</div></div>
+    <div class="unit"><div class="num" id="seconds">00</div><div class="label">SECONDS</div></div>
+  </section>
+  <div id="done">⛏️ THE MINECRAFT ERA IS HERE! 💜</div>
+  <div class="footer">25 NOVEMBER 2026 · 16:05 · LITHUANIA TIME</div>
+</main>
+<script>
+const target = new Date("2026-11-25T16:05:00+02:00").getTime();
+const pad = n => String(n).padStart(2,"0");
+function tick(){
+  let diff = Math.max(0,target-Date.now());
+  if(diff===0){
+    document.getElementById("timer").style.display="none";
+    document.getElementById("done").style.display="block";
+    return;
+  }
+  const d=Math.floor(diff/86400000); diff%=86400000;
+  const h=Math.floor(diff/3600000); diff%=3600000;
+  const m=Math.floor(diff/60000); const s=Math.floor((diff%60000)/1000);
+  document.getElementById("days").textContent=pad(d);
+  document.getElementById("hours").textContent=pad(h);
+  document.getElementById("minutes").textContent=pad(m);
+  document.getElementById("seconds").textContent=pad(s);
+}
+tick(); setInterval(tick,1000);
+</script>
+</body>
+</html>
